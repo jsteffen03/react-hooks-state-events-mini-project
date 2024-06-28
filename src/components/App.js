@@ -17,11 +17,17 @@ function App() {
     setTaskList(filteredTask)
   }
 
+  const categoryList = CATEGORIES
+  .filter(category=> category !== "All")
+  .map((category, index) => {
+    return <option key={index}>{category}</option>
+  })
+
   return (
     <div className="App">
       <h2>My tasks</h2>
       <CategoryFilter categories={CATEGORIES} handleClick={handleClick} setClass={categoryClass} newTaskList={newTaskList}/>
-      <NewTaskForm />
+      <NewTaskForm categoryList={categoryList}/>
       <TaskList tasks = {newTaskList} setTaskList={setTaskList}/>
     </div>
   );
