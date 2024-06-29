@@ -9,6 +9,7 @@ function App() {
   const [categoryClass, setCategoryClass] = useState(" ")
   const [newTaskList, setTaskList] = useState(TASKS)
 
+
   const handleClick = (cat) =>{
     console.log(cat)
     const filteredTask = TASKS.filter((task)=> task.category === cat || cat === "All")
@@ -23,11 +24,16 @@ function App() {
     return <option key={index}>{category}</option>
   })
 
+  const onTaskFormSubmit = (newTask) => {
+    setTaskList([...newTaskList, newTask]);
+  };
+
+
   return (
     <div className="App">
       <h2>My tasks</h2>
       <CategoryFilter categories={CATEGORIES} handleClick={handleClick} setClass={categoryClass} newTaskList={newTaskList}/>
-      <NewTaskForm categoryList={categoryList}/>
+      <NewTaskForm categoryList={categoryList} onTaskFormSubmit={onTaskFormSubmit} setTaskList={setTaskList}/>
       <TaskList tasks = {newTaskList} setTaskList={setTaskList}/>
     </div>
   );
